@@ -71,7 +71,7 @@ pub enum DataRate {
     _2Mbit,
 }
 
-#[cfg(not(feature = "51"))]
+#[cfg(not(feature = "51", feature = "5340-net"))]
 impl From<DataRate> for DATARATE_A {
     fn from(data_rate: DataRate) -> Self {
         if data_rate == DataRate::_1Mbit {

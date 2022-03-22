@@ -38,7 +38,7 @@ pub mod adc;
 #[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod ccm;
 pub mod clocks;
-#[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod comp;
 #[cfg(not(feature = "51"))]
 pub mod delay;
@@ -47,7 +47,7 @@ pub mod ecb;
 pub mod gpio;
 #[cfg(not(feature = "5340-app"))]
 pub mod gpiote;
-#[cfg(not(any(feature = "51", feature = "52810", feature = "52811")))]
+#[cfg(not(any(feature = "51", feature = "52810", feature = "52811", feature = "5340-net")))]
 pub mod i2s;
 #[cfg(any(feature = "52833", feature = "52840"))]
 pub mod ieee802154;
@@ -55,12 +55,13 @@ pub mod ieee802154;
     feature = "52811",
     feature = "52810",
     feature = "9160",
-    feature = "5340-app"
+    feature = "5340-app",
+    feature = "5340-net"
 )))]
 pub mod lpcomp;
 #[cfg(not(feature = "51"))]
 pub mod nvmc;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod ppi;
 #[cfg(not(feature = "51", feature = "5340-net"))]
 pub mod pwm;
@@ -69,7 +70,7 @@ pub mod qdec;
 #[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod rng;
 pub mod rtc;
-#[cfg(not(feature = "51"))]
+#[cfg(not(feature = "51", feature = "5340-net"))]
 pub mod saadc;
 #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod spi;

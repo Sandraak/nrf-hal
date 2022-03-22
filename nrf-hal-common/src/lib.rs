@@ -63,14 +63,14 @@ pub mod lpcomp;
 pub mod nvmc;
 #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod ppi;
-#[cfg(not(feature = "51", feature = "5340-net"))]
+#[cfg(not(any(feature = "51", feature = "5340-net")))]
 pub mod pwm;
-#[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod qdec;
 #[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod rng;
 pub mod rtc;
-#[cfg(not(feature = "51", feature = "5340-net"))]
+#[cfg(not(any(feature = "51", feature = "5340-net")))]
 pub mod saadc;
 #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod spi;
@@ -96,6 +96,7 @@ pub mod uarte;
 pub mod uicr;
 #[cfg(feature = "nrf-usbd")]
 pub mod usbd;
+// #[cfg(feature = "5340-net")]
 pub mod wdt;
 
 pub mod prelude {
@@ -193,7 +194,7 @@ pub use crate::timer::Timer;
 
 #[cfg(feature = "51")]
 pub use crate::adc::Adc;
-#[cfg(not(feature = "51"))]
+#[cfg(not(any(feature = "51", feature = "5340-net")))]
 pub use crate::saadc::Saadc;
 
 #[cfg(feature = "51")]

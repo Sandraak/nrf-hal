@@ -71,7 +71,7 @@ pub enum DataRate {
     _2Mbit,
 }
 
-#[cfg(not(feature = "51", feature = "5340-net"))]
+#[cfg(not(feature = "51"))]
 impl From<DataRate> for DATARATE_A {
     fn from(data_rate: DataRate) -> Self {
         if data_rate == DataRate::_1Mbit {
@@ -253,7 +253,8 @@ impl Ccm {
                 feature = "52840",
                 feature = "52833",
                 feature = "52811",
-                feature = "52810"
+                feature = "52810",
+                feature = "5340-net"
             ))]
             // NOTE(unsafe) Any 8bits pattern is safe to write to this register
             self.regs
@@ -382,7 +383,8 @@ impl Ccm {
                 feature = "52840",
                 feature = "52833",
                 feature = "52811",
-                feature = "52810"
+                feature = "52810",
+                feature = "5340-net"
             ))]
             // NOTE(unsafe) Any 8bits pattern is safe to write to this register
             self.regs

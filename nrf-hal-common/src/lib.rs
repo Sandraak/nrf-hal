@@ -35,7 +35,7 @@ pub use nrf9160_pac as pac;
 
 #[cfg(feature = "51")]
 pub mod adc;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature ="5340-net")))]
 pub mod ccm;
 pub mod clocks;
 #[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app", feature = "5340-net")))]

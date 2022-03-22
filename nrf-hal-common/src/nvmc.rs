@@ -2,13 +2,13 @@
 
 use core::ops::Deref;
 
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 use crate::pac::nvmc;
-#[cfg(any(feature = "9160", feature = "5340-app"))]
+#[cfg(any(feature = "9160", feature = "5340-app", feature = "5340-net"))]
 use crate::pac::nvmc_ns as nvmc;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 use crate::pac::NVMC;
-#[cfg(any(feature = "9160", feature = "5340-app"))]
+#[cfg(any(feature = "9160", feature = "5340-app", feature = "5340-net"))]
 use crate::pac::NVMC_NS as NVMC;
 
 use core::convert::TryInto;
@@ -45,7 +45,7 @@ where
     }
 
     fn enable_erase(&self) {
-        #[cfg(not(any(feature = "9160", feature = "5340-app")))]
+        #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
         self.nvmc.config.write(|w| w.wen().een());
         #[cfg(any(feature = "9160", feature = "5340-app"))]
         self.nvmc.configns.write(|w| w.wen().een());
@@ -76,7 +76,7 @@ where
         while !self.nvmc.readynext.read().readynext().bit_is_set() {}
     }
 
-    #[cfg(not(any(feature = "9160", feature = "5340-app")))]
+    #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
     #[inline]
     fn erase_page(&mut self, page_offset: usize) {
         let bits = &mut (self.storage[page_offset * PAGE_SIZE]) as *mut _ as u32;
@@ -84,7 +84,7 @@ where
         self.wait_ready();
     }
 
-    #[cfg(any(feature = "9160", feature = "5340-app"))]
+    #[cfg(any(feature = "9160", feature = "5340-app", feature = "5340-net" ))]
     #[inline]
     fn erase_page(&mut self, page_offset: usize) {
         self.direct_write_word(page_offset * PAGE_SIZE, 0xffffffff);

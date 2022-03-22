@@ -27,6 +27,9 @@ pub use nrf52840_pac as pac;
 #[cfg(feature = "5340-app")]
 pub use nrf5340_app_pac as pac;
 
+#[cfg(feature = "5340-net")]
+pub use nrf5340_net_pac as pac;
+
 #[cfg(feature = "9160")]
 pub use nrf9160_pac as pac;
 
@@ -59,7 +62,7 @@ pub mod lpcomp;
 pub mod nvmc;
 #[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod ppi;
-#[cfg(not(feature = "51"))]
+#[cfg(not(feature = "51", feature = "5340-net"))]
 pub mod pwm;
 #[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app")))]
 pub mod qdec;
@@ -68,13 +71,13 @@ pub mod rng;
 pub mod rtc;
 #[cfg(not(feature = "51"))]
 pub mod saadc;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod spi;
 #[cfg(not(feature = "51"))]
 pub mod spim;
 #[cfg(not(feature = "51"))]
 pub mod spis;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod temp;
 pub mod time;
 pub mod timer;
@@ -98,7 +101,7 @@ pub mod prelude {
     pub use crate::hal::digital::v2::*;
     pub use crate::hal::prelude::*;
 
-    #[cfg(not(any(feature = "9160", feature = "5340-app")))]
+    #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
     pub use crate::ppi::{ConfigurablePpi, Ppi};
     pub use crate::time::U32Ext;
 }
@@ -122,6 +125,8 @@ pub mod target_constants {
     #[cfg(feature = "52840")]
     pub const EASY_DMA_SIZE: usize = (1 << 16) - 1;
     #[cfg(feature = "5340-app")]
+    pub const EASY_DMA_SIZE: usize = (1 << 16) - 1;
+    #[cfg(feature = "5340-net")]
     pub const EASY_DMA_SIZE: usize = (1 << 16) - 1;
     #[cfg(feature = "9160")]
     pub const EASY_DMA_SIZE: usize = (1 << 12) - 1;
@@ -180,7 +185,7 @@ impl DmaSlice {
 pub use crate::clocks::Clocks;
 #[cfg(not(feature = "51"))]
 pub use crate::delay::Delay;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub use crate::rng::Rng;
 pub use crate::rtc::Rtc;
 pub use crate::timer::Timer;

@@ -6,7 +6,7 @@
 use cfg_if::cfg_if;
 
 cfg_if! {
-    if #[cfg(feature = "9160" )] {
+    if #[cfg(any(feature = "9160", feature = "5340-net"))] {
         use crate::pac::WDT_NS as WDT;
     } else if #[cfg(feature = "5340-app")] {
         use crate::pac::WDT0_NS as WDT;

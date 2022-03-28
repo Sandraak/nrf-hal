@@ -25,7 +25,7 @@ use {
     crate::pac::GPIOTE,
 };
 
-#[cfg(any(feature = "9160", feature = "5340-net"))]
+#[cfg(any(feature = "9160", feature = "5340-net"))] //De 
 use {
     crate::pac::gpiote0_s::{EVENTS_IN, EVENTS_PORT, TASKS_CLR, TASKS_OUT, TASKS_SET},
     crate::pac::GPIOTE1_NS as GPIOTE,

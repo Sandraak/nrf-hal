@@ -556,7 +556,7 @@ impl Instance for TWIS0 {
         feature = "52811"
     )))]
     const INTERRUPT: Interrupt = Interrupt::SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0;
-    #[cfg(feature = "5340-app", feature = "5340-net")]
+    #[cfg(any(feature = "5340-app", feature = "5340-net"))]
     const INTERRUPT: Interrupt = Interrupt::SERIAL0;
     #[cfg(feature = "9160")]
     const INTERRUPT: Interrupt = Interrupt::UARTE0_SPIM0_SPIS0_TWIM0_TWIS0;

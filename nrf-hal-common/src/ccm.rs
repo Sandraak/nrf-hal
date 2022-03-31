@@ -51,7 +51,6 @@ use crate::{
     slice_in_ram,
 };
 
-
 #[cfg(feature = "5340-net")]
 use crate::{
     pac::{AAR_NS as AAR, CCM_NS as CCM},

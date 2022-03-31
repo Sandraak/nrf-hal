@@ -42,7 +42,7 @@ pub enum Port {
     Port0Secure,
 
     /// Port 1, only available on some nRF52 MCUs.
-    #[cfg(any(feature = "52833", feature = "52840"))]
+    #[cfg(any(feature = "52833", feature = "52840", feature = "5340-net"))]
     Port1,
 }
 
@@ -75,6 +75,10 @@ use crate::pac::{p0 as gpio, P0};
 #[cfg(any(feature = "52833", feature = "52840"))]
 use crate::pac::P1;
 
+#[cfg(feature = "5340-net")]
+// use crate::pac::p1_ns as P1;
+use crate::pac::P1_NS as P1;
+
 use crate::hal::digital::v2::{InputPin, OutputPin, StatefulOutputPin};
 use void::Void;
 
@@ -84,7 +88,7 @@ impl<MODE> Pin<MODE> {
             Port::Port0 => 0x00,
             #[cfg(any(feature = "5340-app"))]
             Port::Port0Secure => 0x20,
-            #[cfg(any(feature = "52833", feature = "52840"))]
+            #[cfg(any(feature = "52833", feature = "52840", feature = "5340-net"))]
             Port::Port1 => 0x20,
         };
         Self {
@@ -147,9 +151,9 @@ impl<MODE> Pin<MODE> {
     fn block(&self) -> &gpio::RegisterBlock {
         let ptr = match self.port() {
             Port::Port0 => P0::ptr(),
-            #[cfg(any(feature = "5340-app"))]
+            #[cfg(feature = "5340-app")]
             Port::Port0Secure => P0_S::ptr(),
-            #[cfg(any(feature = "52833", feature = "52840"))]
+            #[cfg(any(feature = "52833", feature = "52840", feature = "5340-net"))]
             Port::Port1 => P1::ptr(),
         };
 

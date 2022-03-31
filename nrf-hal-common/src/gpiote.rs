@@ -15,6 +15,9 @@ use crate::pac::P0;
 #[cfg(any(feature = "52833", feature = "52840"))]
 use crate::pac::P1;
 
+#[cfg(feature = "5340-net")]
+use crate::pac::P1_NS as P1;
+
 use crate::gpio::{
     Floating, Input, Level, OpenDrain, Output, Pin, Port, PullDown, PullUp, PushPull,
 };
@@ -302,7 +305,7 @@ fn config_port_event_pin<P: GpioteInputPin>(pin: &P, sense: PortEventSense) {
         &(*{
             match pin.port() {
                 Port::Port0 => P0::ptr(),
-                #[cfg(any(feature = "52833", feature = "52840"))]
+                #[cfg(any(feature = "52833", feature = "52840", feature = "5340-net"))]
                 Port::Port1 => P1::ptr(),
             }
         })

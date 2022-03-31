@@ -616,7 +616,12 @@ pub struct Pins {
 mod sealed {
     pub trait Sealed {}
     impl Sealed for super::SPIS0 {}
-    #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net", feature = "52810")))]
+    #[cfg(not(any(
+        feature = "9160",
+        feature = "5340-app",
+        feature = "5340-net",
+        feature = "52810"
+    )))]
     impl Sealed for super::SPIS1 {}
     #[cfg(not(any(
         feature = "9160",
@@ -651,7 +656,12 @@ impl Instance for SPIS0 {
     const INTERRUPT: Interrupt = Interrupt::TWIM0_TWIS0_TWI0_SPIM0_SPIS0_SPI0;
 }
 
-#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net", feature = "52810")))]
+#[cfg(not(any(
+    feature = "9160",
+    feature = "5340-app",
+    feature = "5340-net",
+    feature = "52810"
+)))]
 impl Instance for SPIS1 {
     #[cfg(not(feature = "52811"))]
     const INTERRUPT: Interrupt = Interrupt::SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1;

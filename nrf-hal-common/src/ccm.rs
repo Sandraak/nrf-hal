@@ -45,14 +45,26 @@
 //! encryption/decryption. The scratch slice must have a minimum length of 43 bytes, or
 //! (16 + `Packet Length`) bytes, whatever is largest.
 
+#[cfg(not(feature = "5340-net"))]
 use crate::{
     pac::{AAR, CCM},
     slice_in_ram,
 };
+
+
+#[cfg(feature = "5340-net")]
+use crate::{
+    pac::{AAR_NS as AAR, CCM_NS as CCM},
+    slice_in_ram,
+};
+
 use core::sync::atomic::{compiler_fence, Ordering};
 
-#[cfg(not(feature = "51"))]
+#[cfg(not(any(feature = "51",feature = "5340-net")))]
 use crate::pac::ccm::mode::{DATARATE_A, LENGTH_A};
+
+#[cfg(feature = "5340-net")]
+use crate::pac::ccm_ns::mode::{DATARATE_A,LENGTH_A};
 
 const MINIMUM_SCRATCH_AREA_SIZE: usize = 43;
 const HEADER_SIZE: usize = 3;

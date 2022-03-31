@@ -35,10 +35,15 @@ pub use nrf9160_pac as pac;
 
 #[cfg(feature = "51")]
 pub mod adc;
-#[cfg(not(any(feature = "9160", feature = "5340-app", feature ="5340-net")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod ccm;
 pub mod clocks;
-#[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app", feature = "5340-net")))]
+#[cfg(not(any(
+    feature = "51",
+    feature = "9160",
+    feature = "5340-app",
+    feature = "5340-net"
+)))]
 pub mod comp;
 #[cfg(not(feature = "51"))]
 pub mod delay;
@@ -47,7 +52,12 @@ pub mod ecb;
 pub mod gpio;
 #[cfg(not(feature = "5340-app"))]
 pub mod gpiote;
-#[cfg(not(any(feature = "51", feature = "52810", feature = "52811", feature = "5340-net")))]
+#[cfg(not(any(
+    feature = "51",
+    feature = "52810",
+    feature = "52811",
+    feature = "5340-net"
+)))]
 pub mod i2s;
 #[cfg(any(feature = "52833", feature = "52840"))]
 pub mod ieee802154;
@@ -65,7 +75,12 @@ pub mod nvmc;
 pub mod ppi;
 #[cfg(not(any(feature = "51", feature = "5340-net")))]
 pub mod pwm;
-#[cfg(not(any(feature = "51", feature = "9160", feature = "5340-app", feature = "5340-net")))]
+#[cfg(not(any(
+    feature = "51",
+    feature = "9160",
+    feature = "5340-app",
+    feature = "5340-net"
+)))]
 pub mod qdec;
 #[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod rng;
@@ -92,11 +107,11 @@ pub mod twis;
 pub mod uart;
 #[cfg(not(feature = "51"))]
 pub mod uarte;
-#[cfg(not(any(feature = "9160", feature = "5340-app")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
 pub mod uicr;
 #[cfg(feature = "nrf-usbd")]
 pub mod usbd;
-// #[cfg(feature = "5340-net")]
+#[cfg(feature = "5340-net")]
 pub mod wdt;
 
 pub mod prelude {
@@ -187,7 +202,7 @@ impl DmaSlice {
 pub use crate::clocks::Clocks;
 #[cfg(not(feature = "51"))]
 pub use crate::delay::Delay;
-#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub use crate::rng::Rng;
 pub use crate::rtc::Rtc;
 pub use crate::timer::Timer;

@@ -63,13 +63,13 @@ pub struct Pin<MODE> {
 #[cfg(feature = "51")]
 use crate::pac::{gpio, GPIO as P0};
 
-#[cfg(any(feature = "5340-app", feature = "9160"))]
+#[cfg(any(feature = "5340-app", feature = "5340-net", feature = "9160"))]
 use crate::pac::{p0_ns as gpio, P0_NS as P0};
 
 #[cfg(feature = "5340-app")]
 use crate::pac::P0_S;
 
-#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "51")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app",feature = "5340-net", feature = "51")))]
 use crate::pac::{p0 as gpio, P0};
 
 #[cfg(any(feature = "52833", feature = "52840"))]
@@ -339,10 +339,10 @@ pub enum OpenDrainConfig {
 #[cfg(feature = "51")]
 use crate::pac::gpio::pin_cnf;
 
-#[cfg(any(feature = "5340-app", feature = "9160"))]
+#[cfg(any(feature = "5340-app", feature = "5340-net", feature = "9160"))]
 use crate::pac::p0_ns::pin_cnf;
 
-#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "51")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net", feature = "51")))]
 use crate::pac::p0::pin_cnf;
 
 impl OpenDrainConfig {

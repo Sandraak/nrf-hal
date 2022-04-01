@@ -93,7 +93,7 @@ pub mod spi;
 pub mod spim;
 #[cfg(not(feature = "51"))]
 pub mod spis;
-#[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
+#[cfg(not(any(feature = "9160", feature = "5340-app")))]
 pub mod temp;
 pub mod time;
 pub mod timer;

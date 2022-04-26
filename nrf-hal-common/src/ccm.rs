@@ -63,7 +63,7 @@ use core::sync::atomic::{compiler_fence, Ordering};
 use crate::pac::ccm::mode::{DATARATE_A, LENGTH_A};
 
 #[cfg(feature = "5340-net")]
-use crate::pac::ccm_ns::mode::{DATARATE_A,LENGTH_A};
+use crate::pac::ccm_ns::mode::{DATARATE_A, LENGTH_A};
 
 const MINIMUM_SCRATCH_AREA_SIZE: usize = 43;
 const HEADER_SIZE: usize = 3;
@@ -80,14 +80,36 @@ pub enum DataRate {
     _1Mbit,
     #[cfg(not(feature = "51"))]
     _2Mbit,
+    #[cfg(feature = "5340-net")]
+    _125Kbps,
+    #[cfg(feature = "5340-net")]
+    _500Kbps
 }
 
-#[cfg(not(feature = "51"))]
+#[cfg(not(any(feature = "51", feature = "5340-net")))]
 impl From<DataRate> for DATARATE_A {
     fn from(data_rate: DataRate) -> Self {
         if data_rate == DataRate::_1Mbit {
             DATARATE_A::_1MBIT
         } else {
+            DATARATE_A::_2MBIT
+        }
+    }
+}
+
+#[cfg(feature = "5340-net")]
+impl From<DataRate> for DATARATE_A {
+    fn from(data_rate: DataRate) -> Self {
+        if data_rate == DataRate::_125Kbps {
+            DATARATE_A::_125KBPS
+        } 
+        else if data_rate == DataRate::_500Kbps{
+            DATARATE_A::_500KBPS
+        }
+        else if data_rate == DataRate::_1Mbit{
+            DATARATE_A::_1MBIT
+        }
+        else {
             DATARATE_A::_2MBIT
         }
     }

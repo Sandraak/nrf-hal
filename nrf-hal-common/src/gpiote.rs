@@ -372,7 +372,7 @@ fn config_channel_task_pin<P: GpioteOutputPin>(
             TaskOutPolarity::Toggle => w.polarity().toggle(),
         };
 
-        #[cfg(any(feature = "52833", feature = "52840"))]
+        #[cfg(any(feature = "52833", feature = "52840", feature = "5340-net"))]
         {
             match pin.port() {
                 Port::Port0 => w.port().clear_bit(),

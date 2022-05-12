@@ -45,7 +45,7 @@ where
     }
 
     fn enable_erase(&self) {
-        #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
+        #[cfg(not(any(feature = "9160", feature = "5340-app")))]
         self.nvmc.config.write(|w| w.wen().een());
         #[cfg(any(feature = "9160", feature = "5340-app"))]
         self.nvmc.configns.write(|w| w.wen().een());
@@ -70,7 +70,7 @@ where
         while !self.nvmc.ready.read().ready().bit_is_set() {}
     }
 
-    #[cfg(any(feature = "9160", feature = "5340-app"))]
+    #[cfg(any(feature = "9160", feature = "5340-app", feature = "5340-net"))]
     #[inline]
     fn wait_write_ready(&self) {
         while !self.nvmc.readynext.read().readynext().bit_is_set() {}
@@ -93,9 +93,9 @@ where
 
     #[inline]
     fn write_word(&mut self, word_offset: usize, word: u32) {
-        #[cfg(not(any(feature = "9160", feature = "5340-app")))]
+        #[cfg(not(any(feature = "9160", feature = "5340-app", feature = "5340-net")))]
         self.wait_ready();
-        #[cfg(any(feature = "9160", feature = "5340-app"))]
+        #[cfg(any(feature = "9160", feature = "5340-app", feature = "5340-net"))]
         self.wait_write_ready();
         self.direct_write_word(word_offset, word);
         cortex_m::asm::dmb();

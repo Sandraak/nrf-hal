@@ -86,31 +86,16 @@ pub enum DataRate {
     _500Kbps
 }
 
-#[cfg(not(any(feature = "51", feature = "5340-net")))]
+#[cfg(not(feature = "51"))]
 impl From<DataRate> for DATARATE_A {
     fn from(data_rate: DataRate) -> Self {
-        if data_rate == DataRate::_1Mbit {
-            DATARATE_A::_1MBIT
-        } else {
-            DATARATE_A::_2MBIT
-        }
-    }
-}
-
-#[cfg(feature = "5340-net")]
-impl From<DataRate> for DATARATE_A {
-    fn from(data_rate: DataRate) -> Self {
-        if data_rate == DataRate::_125Kbps {
-            DATARATE_A::_125KBPS
-        } 
-        else if data_rate == DataRate::_500Kbps{
-            DATARATE_A::_500KBPS
-        }
-        else if data_rate == DataRate::_1Mbit{
-            DATARATE_A::_1MBIT
-        }
-        else {
-            DATARATE_A::_2MBIT
+        match data_rate {
+            DataRate::_1Mbit =>  DATARATE_A::_1MBIT,
+            DataRate::_2Mbit => DATARATE_A::_2MBIT,
+            #[cfg(feature = "5340-net")]
+            DataRate::_125Kbps => DATARATE_A::_125KBPS,
+            #[cfg(feature = "5340-net")]
+            DataRate::_500Kbps => DATARATE_A::_500KBPS,
         }
     }
 }

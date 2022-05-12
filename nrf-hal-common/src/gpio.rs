@@ -668,7 +668,7 @@ gpio!(P1, p0, p1, Port::Port1, [
     P1_15: (p1_15, 15, Disconnected),
 ]);
 
-#[cfg(any(feature = "5340-app"))]
+#[cfg(feature = "5340-app")]
 gpio!(P0_S, p0, p0_s, Port::Port0Secure, [
     P0_00: (p0_00,  0, Disconnected),
     P0_01: (p0_01,  1, Disconnected),
